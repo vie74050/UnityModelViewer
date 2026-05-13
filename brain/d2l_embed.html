@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>BCIT | freeExplorer</title>
+		<link rel="stylesheet" href="../TemplateData/style.css">
+		<link rel="shortcut icon" href="../TemplateData/favicon.ico" />
+		<script src="../TemplateData/UnityProgress.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	</head>
+	<body class="template" style="width:100%;" onresize="Resize()">
+		<div style="margin:5px">
+			<script src="https://learn.bcit.ca/shared/scripts/deployment/vsmbanner_custom_1.js"></script>
+		</div>
+		<div class="instructions">
+			Controls: Left mouse button to select and pan. Right mouse button to rotate. Scrollwheel to zoom. Arrow keys to pan.
+		</div>
+		<div id="container" class="clear" >
+			<canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+
+
+			<div id="progressloader"></div>
+			<div class="fullscreen"><img src="../TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="FullScreen()" >
+		</div>
+
+
+		<script type='text/javascript'>
+			var Module = {
+				TOTAL_MEMORY : 268435456,
+				errorhandler : null, // arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
+				compatibilitycheck : null,
+				dataUrl : "Release/brain.datagz",
+				codeUrl : "Release/brain.jsgz",
+				memUrl : "Release/brain.memgz",
+
+			};
+		</script>
+		<script src="Release/UnityLoader.js"></script>
+
+		<script type='text/javascript'>
+			// custom event when model loaded and ready
+			function UnityJSPreHandler() {
+				var fn = Module.setStatus;
+				var progress_div = document.getElementById("progressloader");
+
+
+
+				Resize();
+
+				Module.setStatus = function(e) {
+					progress_div.innerHTML = e;
+
+					if (e == "") {
+						// full screen does not work inside iframe embed (D2L)
+						if (window.self !== window.top) {
+							console.log("within iframe");
+							$(".fullscreen").hide();
+						}
+						$("#container>div:eq(2)").hide();
+						//$("#progressloader").hide();
+
+					}
+					return fn(e);
+				};
+
+			}
+
+			function Resize(){
+				$("#canvas").css("width","100vw");
+				$("#canvas").css("height","85vh");
+
+				console.log("resize");
+
+			}
+			function FullScreen(){
+
+				  SetFullscreen(1);
+			}
+
+		</script>
+	</body>
+</html>

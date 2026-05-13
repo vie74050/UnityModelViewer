@@ -1,0 +1,13 @@
+{
+"companyName": "BCIT",
+"productName": "Skull",
+"dataUrl": "Skull_partsWithExpandView.data.unityweb",
+"asmCodeUrl": "Skull_partsWithExpandView.asm.code.unityweb",
+"asmMemoryUrl": "Skull_partsWithExpandView.asm.memory.unityweb",
+"asmFrameworkUrl": "Skull_partsWithExpandView.asm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
